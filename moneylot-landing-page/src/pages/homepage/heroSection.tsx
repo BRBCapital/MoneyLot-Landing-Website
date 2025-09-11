@@ -144,17 +144,19 @@ const HeroSection = () => {
       </div>
 
       {/* Content */}
+      {/* Content */}
       <div className="container relative z-10 mx-auto flex flex-col lg:flex-row items-center justify-between mt-[-10px] sm:mt-[-20px] lg:mt-0">
         {/* Text Section */}
+        {/* Text Section */}
         <div className="z-10 w-full text-left lg:w-1/2" id="heroText">
-          <h1 className="font-extrabold leading-snug text-white text-xl sm:text-2xl md:text-3xl lg:text-[72px]">
+          <h1 className="font-extrabold leading-snug text-white text-3xl sm:text-4xl md:text-5xl lg:text-[72px]">
             Build Wealth, <br /> <span>One Lot at a Time</span>
           </h1>
 
-          {/* Mobile/tablet layout compact */}
-          <div className="flex flex-row lg:block items-start mt-2 sm:mt-3 lg:mt-0 justify-between">
+          {/* ✅ Mobile/tablet: column layout */}
+          <div className="flex flex-col lg:block items-center mt-4 sm:mt-6 lg:mt-0">
             <div className="flex flex-col items-start text-left">
-              <p className="text-xs sm:text-sm md:text-base text-gray-300 max-w-[90%] sm:max-w-sm lg:w-3/4 mb-2 sm:mb-3">
+              <p className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-[90%] sm:max-w-sm lg:w-3/4 mb-3 sm:mb-4">
                 From everyday wins to long-term goals, Moneylot helps you save
                 and invest what matters most.
               </p>
@@ -164,17 +166,17 @@ const HeroSection = () => {
                     .getElementById("explore")
                     ?.scrollIntoView({ behavior: "smooth" })
                 }
-                className="rounded-full hover:border-none bg-[#89E081] px-3 sm:px-5 py-1.5 text-black shadow-lg text-xs sm:text-sm transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-0 active:outline-none active:ring-0"
+                className="rounded-full hover:border-none bg-[#89E081] px-6 sm:px-7 py-3 sm:py-4 text-black shadow-lg text-lg sm:text-xl font-medium transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-0 active:outline-none active:ring-0"
               >
                 Explore Moneylot
               </button>
             </div>
 
-            {/* Phone right aligned */}
+            {/* ✅ Mobile phone image enlarged by ~70% */}
             <img
               src={imagesAndIcons.handPhone}
               alt="Moneylot App on a phone"
-              className="block lg:hidden object-contain max-h-[160px] sm:max-h-[170px] ml-2"
+              className="block lg:hidden object-contain max-h-[620px] sm:max-h-[720px] mt-6"
             />
           </div>
         </div>
@@ -262,7 +264,7 @@ export default HeroSection;
 //                 src={imagesAndIcons.waitListEmoji}
 //                 alt="Waitlist Emoji"
 //                 className="w-6 h-6 md:w-8 md:h-6"
-//               />
+//                       />
 //             </span>
 //             Join Waitlist
 //           </button>
