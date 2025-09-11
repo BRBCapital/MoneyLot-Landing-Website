@@ -1,0 +1,17 @@
+@keyframes frameFall {
+  0% {
+    transform: translateY(-100%); /* Start from above */
+  }
+  100% {
+    transform: translateY(100%); /* End at the bottom of the screen */
+  }
+}
+
+@keyframes fallingCoins {
+  0% {
+    opacity: 0; /* Start as invisible */
+  }
+  100% {
+    opacity: 1; /* End as visible */
+  }
+}
