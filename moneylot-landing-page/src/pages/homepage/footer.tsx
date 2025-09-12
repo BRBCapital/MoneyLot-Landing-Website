@@ -1,7 +1,18 @@
-
 import { imagesAndIcons } from "../../constants/imagesAndIcons";
+import { useState, useEffect } from "react";
 
 const Footer = () => {
+  const [isLaptop, setIsLaptop] = useState(false);
+
+  useEffect(() => {
+    const checkSize = () => {
+      setIsLaptop(window.innerWidth >= 980 && window.innerWidth <= 1239);
+    };
+    checkSize();
+    window.addEventListener("resize", checkSize);
+    return () => window.removeEventListener("resize", checkSize);
+  }, []);
+
   return (
     <footer className="w-full bg-white border-t border-gray-200 px-4 sm:px-6 md:px-20 py-10">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-6">
@@ -25,9 +36,12 @@ const Footer = () => {
         </div>
 
         {/* Right Section - Contact + Lagos Office */}
-        <div className="flex flex-col sm:flex-row sm:justify-between w-full sm:w-3/4 md:w-1/2 gap-6 sm:gap-4 md:gap-0">
+        <div
+          className={`flex w-full sm:w-3/4 md:w-1/2 gap-6 
+            ${isLaptop ? "flex-col" : "lg:flex-row lg:justify-between lg:gap-0"}`}
+        >
           {/* Contact Us Section */}
-          <div className="flex flex-col items-start sm:items-start md:items-end sm:ml-30 space-y-1">
+          <div className="flex flex-col items-start lg:items-end space-y-1">
             <p className="text-[10px] sm:text-xs font-semibold text-[#89E081]">
               Contact Us
             </p>
@@ -40,12 +54,12 @@ const Footer = () => {
           </div>
 
           {/* Lagos Office Section */}
-          <div className="flex flex-col items-start sm:items-start md:items-end space-y-1">
+          <div className="flex flex-col items-start lg:items-end space-y-1">
             <p className="text-[10px] sm:text-xs font-semibold text-[#89E081]">
               Lagos Office
             </p>
             <p className="text-gray-600 text-[10px] sm:text-xs">
-              Plot 3A Shakiru Anjorin Street Lekki phase 1, Lagos, Nigeria
+              Plot 3A Shakiru Anjorin Street Lekki Phase 1, Lagos, Nigeria
             </p>
           </div>
         </div>

@@ -46,6 +46,10 @@ import sectionTwoImageTwoWebp from "../assets/sectionTwoImageTwo.webp";
 import sectionThreeWebp from "../assets/sectionThree.webp";
 import sectionOneBackground from "../assets/sectionOneBackground.png";
 import logoWhite from "../assets/logoWhite.png";
+import X from "../assets/X.png";
+import mobileCoins from "../assets/mobileCoins.png";
+import blackLogo from "../assets/blackLogo.png";
+import hamburger from "../assets/hamburger.png";
 
 export const imagesAndIcons = {
   animationOne: animationOne,
@@ -96,4 +100,8 @@ export const imagesAndIcons = {
   sectionThreeWebp: sectionThreeWebp,
   sectionOneBackground:sectionOneBackground,
   logoWhite:logoWhite,
+  X:X,
+  mobileCoins:mobileCoins,
+  blackLogo:blackLogo,
+  hamburger:hamburger,
 };

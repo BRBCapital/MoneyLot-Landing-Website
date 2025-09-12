@@ -158,22 +158,11 @@ const CurlyTickerMobile: React.FC<CurlyTickerProps> = ({
           dominantBaseline="middle"
         >
           <textPath ref={textPath1Ref} href="#ribbonPathMobile">
-            {phrase.repeat(3)}
+            {phrase.repeat(100)}
           </textPath>
         </text>
 
-        <text
-          ref={textEl2Ref}
-          fill="black"
-          fontSize="16"
-          fontWeight={600}
-          letterSpacing="1.2"
-          dominantBaseline="middle"
-        >
-          <textPath ref={textPath2Ref} href="#ribbonPathMobile">
-            {phrase.repeat(3)}
-          </textPath>
-        </text>
+       
       </svg>
     </div>
   );

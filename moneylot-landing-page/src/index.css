@@ -4,6 +4,21 @@
 @tailwind utilities;
 @import "tailwindcss";
 
+
+@media (min-width: 1280px) and (max-width: 1439px) {
+  h1.hero-text {
+    font-size: 38px !important;
+  }
+
+  p.hero-subtext {
+    font-size: 18px !important;
+  }
+
+  img.hero-phone {
+    max-height: 700px !important;
+  }
+}
+
 body {
   font-family: "Geist", sans-serif;
 }

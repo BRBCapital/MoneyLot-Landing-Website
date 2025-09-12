@@ -79,7 +79,8 @@ const InvestmentSection = () => {
         <div className="w-full md:w-1/2 p-2 text-center md:text-left">
           <h2 className="text-3xl md:text-5xl font-normal text-gray-900">
             Smart <br className="hidden md:block" />
-            Investing<br/>
+            Investing
+            <br />
             Starts Here
           </h2>
           <p className="mt-4 text-base md:text-lg text-gray-600 mx-auto md:mx-0 w-full md:w-[85%] text-center md:text-justify">
@@ -91,7 +92,8 @@ const InvestmentSection = () => {
       </div>
 
       {/* Growth Simplified Section */}
-      <div className="container mx-auto flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 md:space-x-4 mt-12">
+      {/* Growth Simplified Section */}
+      <div className="container mx-auto flex flex-col-reverse md:flex-row justify-between items-center space-y-6 md:space-y-0 md:space-x-4 mt-12">
         {/* Left Section - Text */}
         <div className="w-full md:w-1/2 p-2 text-center md:text-left">
           <h2 className="text-3xl md:text-5xl font-normal text-gray-900">

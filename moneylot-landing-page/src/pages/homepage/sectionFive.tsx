@@ -50,7 +50,7 @@ const SectionFive = () => {
     } catch (error: any) {
       console.error(error);
       toast.error(
-        error?.response?.data?.title ||
+        error?.response?.data?.message ||
           "Something went wrong. Please try again."
       );
     } finally {
@@ -66,7 +66,7 @@ const SectionFive = () => {
       className="relative w-full bg-[#F6F6F6] flex flex-col items-center justify-center py-20 px-6 overflow-hidden"
     >
       {/* Header */}
-      <h1 className="text-[32px] sm:text-[48px] md:text-[72px] font-normal text-center text-gray-900 mt-20 leading-tight">
+      <h1 className="text-[32px] sm:text-[48px] md:text-[72px] font-normal text-center text-gray-900 mt-15 leading-tight">
         Ready to transform <br className="hidden md:block" /> your finances?
       </h1>
 
