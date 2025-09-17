@@ -135,7 +135,7 @@ const CurlyTicker2Mobile: React.FC<CurlyTickerProps> = ({
           href="#ribbonPath2"
           fill="none"
           stroke="#89E081"
-          strokeWidth="33"
+          strokeWidth="32"
           strokeLinecap="round"
           strokeLinejoin="round"
           style={{ vectorEffect: "non-scaling-stroke" }}
@@ -144,17 +144,28 @@ const CurlyTicker2Mobile: React.FC<CurlyTickerProps> = ({
         <text
           ref={textEl1Ref}
           fill="black"
-          fontSize="18"
+          fontSize="16"
           fontWeight={600}
           letterSpacing="1.2"
           dominantBaseline="middle"
         >
           <textPath ref={textPath1Ref} href="#ribbonPath2">
-            {phrase.repeat(100)}
+            {phrase.repeat(3)}
           </textPath>
         </text>
 
-        
+        <text
+          ref={textEl2Ref}
+          fill="black"
+          fontSize="16"
+          fontWeight={600}
+          letterSpacing="1.2"
+          dominantBaseline="middle"
+        >
+          <textPath ref={textPath2Ref} href="#ribbonPath2">
+            {phrase.repeat(3)}
+          </textPath>
+        </text>
       </svg>
     </div>
   );

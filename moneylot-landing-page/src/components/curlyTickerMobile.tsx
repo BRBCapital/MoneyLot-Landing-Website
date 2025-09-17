@@ -53,11 +53,7 @@ const CurlyTickerMobile: React.FC<CurlyTickerProps> = ({
         tEl2.getComputedTextLength() || 0
       );
 
-      while (
-        (tLen < pLen * 1.02 || tLen === 0) &&
-        attempts < 60 &&
-        !cancelled
-      ) {
+      while ((tLen < pLen * 1.02 || tLen === 0) && attempts < 60 && !cancelled) {
         repeats++;
         text = phrase.repeat(repeats);
         tPath1.textContent = text;
@@ -75,9 +71,7 @@ const CurlyTickerMobile: React.FC<CurlyTickerProps> = ({
       const T = Math.max(1, tLen);
 
       // Safari detection
-      const isSafari = /^((?!chrome|android).)*safari/i.test(
-        navigator.userAgent
-      );
+      const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
       if (isSafari) {
         const len1 = tEl1.getComputedTextLength();
         const len2 = tEl2.getComputedTextLength();
@@ -158,13 +152,26 @@ const CurlyTickerMobile: React.FC<CurlyTickerProps> = ({
         <text
           ref={textEl1Ref}
           fill="black"
-          fontSize="18"
+          fontSize="16"
           fontWeight={600}
           letterSpacing="1.2"
           dominantBaseline="middle"
         >
-          <textPath ref={textPath1Ref} href="#ribbonPathMobile" dy="8">
-            {phrase.repeat(100)}
+          <textPath ref={textPath1Ref} href="#ribbonPathMobile">
+            {phrase.repeat(3)}
+          </textPath>
+        </text>
+
+        <text
+          ref={textEl2Ref}
+          fill="black"
+          fontSize="16"
+          fontWeight={600}
+          letterSpacing="1.2"
+          dominantBaseline="middle"
+        >
+          <textPath ref={textPath2Ref} href="#ribbonPathMobile">
+            {phrase.repeat(3)}
           </textPath>
         </text>
       </svg>
