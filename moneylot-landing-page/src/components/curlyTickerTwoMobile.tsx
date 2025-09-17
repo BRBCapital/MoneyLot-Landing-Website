@@ -135,7 +135,7 @@ const CurlyTicker2Mobile: React.FC<CurlyTickerProps> = ({
           href="#ribbonPath2"
           fill="none"
           stroke="#89E081"
-          strokeWidth="20"
+          strokeWidth="33"
           strokeLinecap="round"
           strokeLinejoin="round"
           style={{ vectorEffect: "non-scaling-stroke" }}
@@ -144,7 +144,7 @@ const CurlyTicker2Mobile: React.FC<CurlyTickerProps> = ({
         <text
           ref={textEl1Ref}
           fill="black"
-          fontSize="16"
+          fontSize="18"
           fontWeight={600}
           letterSpacing="1.2"
           dominantBaseline="middle"

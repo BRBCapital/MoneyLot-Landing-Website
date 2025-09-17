@@ -50,6 +50,7 @@ import X from "../assets/X.png";
 import mobileCoins from "../assets/mobileCoins.png";
 import blackLogo from "../assets/blackLogo.png";
 import hamburger from "../assets/hamburger.png";
+import urlLogo from "../assets/urlLogo.png";
 
 export const imagesAndIcons = {
   animationOne: animationOne,
@@ -104,4 +105,5 @@ export const imagesAndIcons = {
   mobileCoins:mobileCoins,
   blackLogo:blackLogo,
   hamburger:hamburger,
+  urlLogo:urlLogo
 };
