@@ -24,7 +24,7 @@ const Success = () => {
       {/* Content Container */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full px-6">
         {/* Checkmark Icon Section */}
-        <div className="relative flex items-center justify-center mb-8">
+        <div className="relative flex items-center justify-center mb-24">
           {/* Sparkles - positioned around the circle */}
           {/* Top Sparkle */}
           <svg
