@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+
 import { imagesAndIcons } from "../../constants/imagesAndIcons";
 
 const Cancelled = () => {
