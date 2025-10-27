@@ -52,6 +52,9 @@ import blackLogo from "../assets/blackLogo.png";
 import hamburger from "../assets/hamburger.png";
 import urlLogo from "../assets/urlLogo.png";
 import phoneBackground from "../assets/phoneBackground.png";
+import successful from "../assets/successful.png";
+import failed from "../assets/failed.png";
+import cancelled from "../assets/cancelled.png";
 
 export const imagesAndIcons = {
   animationOne: animationOne,
@@ -107,5 +110,8 @@ export const imagesAndIcons = {
   blackLogo:blackLogo,
   hamburger:hamburger,
   urlLogo:urlLogo,
-  phoneBackground:phoneBackground
+  phoneBackground:phoneBackground,
+  successful:successful,
+  failed:failed,
+  cancelled:cancelled
 };
