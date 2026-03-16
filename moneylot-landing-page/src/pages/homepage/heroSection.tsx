@@ -66,17 +66,10 @@ const HeroSection = () => {
             window.location.href = "https://app.moneylot.com/entry";
           }}
         >
-          <span className="hidden sm:flex w-0 overflow-hidden group-hover:w-10 transition-all duration-300">
-            <img
-              src={imagesAndIcons.waitListEmoji}
-              alt="Waitlist Emoji"
-              className="w-6 h-6 md:w-8 md:h-6"
-            />
-          </span>
           <p style={{ marginLeft: -5 }}>Get Started</p>
         </button>
         <button
-          className="bg-[#F6F6F6] text-black py-1 px-2 sm:py-2 sm:px-3 hover:border-none md:py-1 md:px-3 rounded-full text-xs sm:text-sm md:text-sm focus:outline-none focus:ring-0 active:outline-none active:ring-0"
+          className="bg-[#F6F6F6] text-black py-1 px-2 sm:py-2 sm:px-3 hover:border-none md:py-1 md:px-3 rounded-full text-xs sm:text-sm md:text-sm focus:outline-none focus:ring-0 active:outline-none active:ring-0 min-w-[76px] sm:min-w-[84px]"
           onClick={() => {
             window.location.href = "https://app.moneylot.com/login";
           }}
