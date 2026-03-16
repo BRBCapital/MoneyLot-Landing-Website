@@ -61,22 +61,10 @@ const HeroSection = () => {
       <img src={imagesAndIcons.logoWhite} alt="Moneylot Logo" className="h-9" />
       <div className="flex space-x-2 sm:space-x-4 mr-10">
         <button
-          className="bg-[#F6F6F6] text-black py-1 px-2 sm:py-2 sm:px-3 hover:border-none md:py-1 md:px-3 rounded-full text-xs sm:text-sm md:text-sm focus:outline-none focus:ring-0 active:outline-none active:ring-0"
-          onClick={() =>
-            document
-              .getElementById("aboutUs")
-              ?.scrollIntoView({ behavior: "smooth" })
-          }
-        >
-          About Us
-        </button>
-        <button
           className="group bg-[#89E081] text-black px-2 sm:px-3 md:px-3 rounded-full flex items-center gap-1 sm:gap-2 md:gap-2 text-xs sm:text-sm md:text-sm hover:border-none focus:outline-none focus:ring-0 active:outline-none active:ring-0"
-          onClick={() =>
-            document
-              .getElementById("waitlist")
-              ?.scrollIntoView({ behavior: "smooth" })
-          }
+          onClick={() => {
+            window.location.href = "https://app.moneylot.com/entry";
+          }}
         >
           <span className="hidden sm:flex w-0 overflow-hidden group-hover:w-10 transition-all duration-300">
             <img
@@ -85,19 +73,27 @@ const HeroSection = () => {
               className="w-6 h-6 md:w-8 md:h-6"
             />
           </span>
-          <p style={{ marginLeft: -5 }}>Join Waitlist</p>
+          <p style={{ marginLeft: -5 }}>Get Started</p>
+        </button>
+        <button
+          className="bg-[#F6F6F6] text-black py-1 px-2 sm:py-2 sm:px-3 hover:border-none md:py-1 md:px-3 rounded-full text-xs sm:text-sm md:text-sm focus:outline-none focus:ring-0 active:outline-none active:ring-0"
+          onClick={() => {
+            window.location.href = "https://app.moneylot.com/login";
+          }}
+        >
+          Log in
         </button>
       </div>
     </>
   );
 
-  // handlers for menu items: keep same behavior, then close menu
-  const handleAboutUs = () => {
-    document.getElementById("aboutUs")?.scrollIntoView({ behavior: "smooth" });
+  // handlers for menu items: navigate, then close menu
+  const handleGetStarted = () => {
+    window.location.href = "https://app.moneylot.com/entry";
     setMenuOpen(false);
   };
-  const handleWaitlist = () => {
-    document.getElementById("waitlist")?.scrollIntoView({ behavior: "smooth" });
+  const handleLogin = () => {
+    window.location.href = "https://app.moneylot.com/login";
     setMenuOpen(false);
   };
 
@@ -278,17 +274,17 @@ const HeroSection = () => {
           {/* Menu items */}
           <div className="mt-8 px-6 space-y-6">
             <button
-              onClick={handleAboutUs}
-              className="w-full text-left text-black text-lg font-semibold bg-transparent"
+              onClick={handleGetStarted}
+              className="w-full text-left text-[#08911A] text-lg font-semibold bg-transparent"
             >
-              About Us
+              Get Started
             </button>
 
             <button
-              onClick={handleWaitlist}
-              className="w-full text-left text-[#08911A] text-lg font-semibold bg-transparent"
+              onClick={handleLogin}
+              className="w-full text-left text-black text-lg font-semibold bg-transparent"
             >
-              Join Waitlist
+              Log in
             </button>
           </div>
         </div>
