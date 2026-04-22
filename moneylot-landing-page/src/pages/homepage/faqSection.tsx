@@ -22,7 +22,7 @@ const FAQSection = () => {
   };
 
   const pillWidthClassById: Record<string, string> = {
-    // Desktop sizing to match Figma rows: 2 pills, then 3, then 2
+    // Desktop pill widths for the left column (rows: 2, 3, 2)
     // Reduced ~30% to prevent overflow inside the 46% left column
     // Bumped ~10% from the reduced sizes (still safe from overflow)
     general: "md:w-[120px]",
@@ -86,22 +86,86 @@ const FAQSection = () => {
     {
       id: "savings",
       name: "Savings",
-      faqs: [],
+      faqs: [
+        {
+          question: "What savings options are available on Moneylot?",
+          answer:
+            "Moneylot offers smart savings options to help you save with purpose. These plans make it easy to stay disciplined, reach your goals, and grow your money.",
+        },
+        {
+          question: "What Savings plans does Moneylot offer?",
+          answer:
+            "• My Moneylot — Your default plan, created automatically when you sign up. It’s flexible: add money anytime, use automatic contributions, and withdraw during designated periods. It earns daily interest.\n\n• Regular Savings — A goal-based plan for targets like rent, travel, school fees, or business expansion. You commit to a fixed saving period; funds stay locked until maturity in exchange for higher interest rates.\n\n• Emergency Savings — For unexpected expenses. Save and withdraw at any time while still earning interest. More than four withdrawals in a month means interest for that month is forfeited from the fifth withdrawal onward.",
+        },
+        {
+          question: "What is Quick Save?",
+          answer:
+            "Quick Save lets you instantly save funds into a selected savings plan using your preferred payment method.",
+        },
+        {
+          question: "Can I automate my savings?",
+          answer:
+            "Yes. Auto Save lets you set an amount to be saved automatically at scheduled intervals so your savings happen without manual effort.",
+        },
+      ],
     },
     {
       id: "investment",
       name: "Investment",
-      faqs: [],
+      faqs: [
+        {
+          question: "What types of investments does Moneylot offer?",
+          answer:
+            "Moneylot Investments make wealth growth simple and accessible. With clear options and built-in transparency, users can invest confidently at their own pace. There are three types of investments available: short-term, mid-term, and long-term investments.\n\n• Short-Term Investments (up to 90 days) — Flexible plans designed for quick returns over a shorter period.\n\n• Mid-Term Investments (up to 180 days) — Balanced plans that offer stability with moderate returns. Ideal for mid-range goals such as tuition, projects, or business cycles.\n\n• Long-Term Investments (9–12 months) — Fixed plans with tenors from 9 months upward and higher returns. Offers higher returns than savings, simplified investing for first-timers, and fixed tenor options.",
+        },
+        {
+          question: "Can I reinvest?",
+          answer:
+            "Yes. You can reinvest your invested capital once your investment tenor is complete and the investment has matured.",
+        },
+      ],
     },
     {
       id: "investment-advance",
       name: "Investment Advance",
-      faqs: [],
+      faqs: [
+        {
+          question: "What is the benefit of Investment Advance?",
+          answer:
+            "Investment Advance allows you to access instant funds based on your active savings and investment balance.",
+        },
+        {
+          question: "How much can I access through Investment Advance?",
+          answer:
+            "As an eligible user, you can access up to 60% of the value of your active savings or investments.",
+        },
+        {
+          question: "How do I apply for an Investment Advance?",
+          answer:
+            "Select Investment Advance from the dashboard, review your eligible amount, accept the terms, and proceed. Funds are disbursed to your linked withdrawal account.",
+        },
+        {
+          question: "How do I repay my Investment Advance?",
+          answer:
+            "Repayments can be made manually when due or automatically deducted from savings or investment balances at maturity.",
+        },
+        {
+          question: "What happens if I miss a repayment?",
+          answer:
+            "You will receive reminders. Missed repayments may attract penalties according to the agreed terms.",
+        },
+      ],
     },
     {
       id: "support-help",
       name: "Support & Help",
-      faqs: [],
+      faqs: [
+        {
+          question: "How can I contact the Moneylot support team?",
+          answer:
+            "You can reach the Moneylot support team through the following channels:\n\n• In-app chat\n• Email: hello@moneylot.com\n• Phone: +2348101207356\n• Office visit: Plot 3A, Shakiru Anjorin Street, Lekki Phase 1, Lagos State, Nigeria",
+        },
+      ],
     },
   ];
 
@@ -209,7 +273,7 @@ const FAQSection = () => {
                       </button>
 
                       {isOpen && (
-                        <p className="mt-3 text-[#8A8A8A] text-[16px] leading-[23px] md:text-[18px] md:leading-[26px]">
+                        <p className="mt-3 text-[#8A8A8A] text-[16px] leading-[23px] md:text-[18px] md:leading-[26px] whitespace-pre-line">
                           {faq.answer}
                         </p>
                       )}
