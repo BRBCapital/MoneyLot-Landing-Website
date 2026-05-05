@@ -88,19 +88,9 @@ const FAQSection = () => {
       name: "Savings",
       faqs: [
         {
-          question: "What savings options are available on Moneylot?",
-          answer:
-            "Moneylot offers smart savings options to help you save with purpose. These plans make it easy to stay disciplined, reach your goals, and grow your money.",
-        },
-        {
           question: "What Savings plans does Moneylot offer?",
           answer:
             "• My Moneylot — Your default plan, created automatically when you sign up. It’s flexible: add money anytime, use automatic contributions, and withdraw during designated periods. It earns daily interest.\n\n• Regular Savings — A goal-based plan for targets like rent, travel, school fees, or business expansion. You commit to a fixed saving period; funds stay locked until maturity in exchange for higher interest rates.\n\n• Emergency Savings — For unexpected expenses. Save and withdraw at any time while still earning interest. More than four withdrawals in a month means interest for that month is forfeited from the fifth withdrawal onward.",
-        },
-        {
-          question: "What is Quick Save?",
-          answer:
-            "Quick Save lets you instantly save funds into a selected savings plan using your preferred payment method.",
         },
         {
           question: "Can I automate my savings?",
@@ -130,11 +120,6 @@ const FAQSection = () => {
       name: "Investment Advance",
       faqs: [
         {
-          question: "What is the benefit of Investment Advance?",
-          answer:
-            "Investment Advance allows you to access instant funds based on your active savings and investment balance.",
-        },
-        {
           question: "How much can I access through Investment Advance?",
           answer:
             "As an eligible user, you can access up to 60% of the value of your active savings or investments.",
@@ -148,11 +133,6 @@ const FAQSection = () => {
           question: "How do I repay my Investment Advance?",
           answer:
             "Repayments can be made manually when due or automatically deducted from savings or investment balances at maturity.",
-        },
-        {
-          question: "What happens if I miss a repayment?",
-          answer:
-            "You will receive reminders. Missed repayments may attract penalties according to the agreed terms.",
         },
       ],
     },
