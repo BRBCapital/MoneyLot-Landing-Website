@@ -563,7 +563,9 @@ function buildClientServiceAgreementPreamble(
         },
         {
           number: "3",
-          paragraphs: ["PASTE Whereas item 3 here."],
+          paragraphs: [
+            "The Parties have decided to enter into this Agreement for the purpose of setting out the terms and conditions which will govern the relationship.",
+          ],
         },
       ],
     },
