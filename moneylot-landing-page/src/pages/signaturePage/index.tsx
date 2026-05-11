@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 import sidebar from "../../assets/sidebar.png";
@@ -14,45 +14,53 @@ type Step = {
   active?: boolean;
 };
 
+type AgreementDetails = {
+  email: string;
+  fullName: string;
+  firstName: string;
+  lastName: string;
+  date: string;
+  address: string;
+  residentialAddress: string;
+  residentialCity: string;
+  residentialState: string;
+  token: string;
+};
+
 const SignaturePage = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const token = searchParams.get("token");
-  const agreementDetails = useMemo(() => {
-    const fullName = searchParams.get("fullName") ?? "";
-    return {
-      email: searchParams.get("email") ?? "",
-      fullName,
-      firstName: fullName.trim().split(/\s+/)[0] ?? "",
-      date: searchParams.get("date") ?? "",
-      address: searchParams.get("address") ?? "",
-      token: token ?? "",
-    };
-  }, [searchParams, token]);
+  const [agreementDetails] = useState<AgreementDetails>(() =>
+    getAgreementDetails(searchParams),
+  );
 
   const steps: Step[] = useMemo(
     () => [
-      { id: "review", title: "Review Agreement", icon: FileMagnifyingGlass, active: true },
+      {
+        id: "review",
+        title: "Review Agreement",
+        icon: FileMagnifyingGlass,
+        active: true,
+      },
       { id: "terms", title: "Agree to Terms & Conditions", icon: SealCheck },
       { id: "confirm", title: "Confirmation", icon: Signature },
     ],
-    []
+    [],
   );
 
   useEffect(() => {
     sessionStorage.setItem(
       "moneylotAgreementDetails",
-      JSON.stringify(agreementDetails)
+      JSON.stringify(agreementDetails),
     );
+
+    if (window.location.search) {
+      window.history.replaceState(null, "", window.location.pathname);
+    }
   }, [agreementDetails]);
 
   const handleViewAgreement = () => {
-    const params = new URLSearchParams();
-    Object.entries(agreementDetails).forEach(([key, value]) => {
-      if (value) params.set(key, value);
-    });
-    const qs = params.toString();
-    navigate(`/client-service-agreement${qs ? `?${qs}` : ""}`);
+    navigate("/client-service-agreement");
   };
 
   return (
@@ -87,11 +95,16 @@ const SignaturePage = () => {
               {steps.map((step, idx) => {
                 const isActive = Boolean(step.active);
                 return (
-                  <div key={step.id} className="relative z-10 flex items-center gap-4">
+                  <div
+                    key={step.id}
+                    className="relative z-10 flex items-center gap-4"
+                  >
                     <div
                       className={[
                         "h-16 w-16 rounded-md flex items-center justify-center shrink-0",
-                        isActive && idx !== 0 ? "bg-[#EAF8E8]" : "bg-transparent",
+                        isActive && idx !== 0
+                          ? "bg-[#EAF8E8]"
+                          : "bg-transparent",
                       ].join(" ")}
                     >
                       <img
@@ -131,5 +144,37 @@ const SignaturePage = () => {
   );
 };
 
-export default SignaturePage;
+function getAgreementDetails(searchParams: URLSearchParams): AgreementDetails {
+  const firstName = searchParams.get("firstName") ?? "";
+  const lastName = searchParams.get("lastName") ?? "";
+  const fullName =
+    searchParams.get("fullName") ||
+    searchParams.get("accountName") ||
+    [firstName, lastName].filter(Boolean).join(" ");
+  const residentialAddress = searchParams.get("residentialAddress") ?? "";
+  const residentialCity =
+    searchParams.get("residientialCity") ||
+    searchParams.get("residentialCity") ||
+    "";
+  const residentialState = searchParams.get("residentialState") ?? "";
+  const address =
+    searchParams.get("address") ||
+    [residentialAddress, residentialCity, residentialState]
+      .filter(Boolean)
+      .join(", ");
 
+  return {
+    email: searchParams.get("email") ?? "",
+    firstName: firstName || fullName.trim().split(/\s+/)[0] || "",
+    lastName,
+    fullName,
+    date: searchParams.get("date") ?? "",
+    address,
+    residentialAddress,
+    residentialCity,
+    residentialState,
+    token: searchParams.get("token") ?? "",
+  };
+}
+
+export default SignaturePage;

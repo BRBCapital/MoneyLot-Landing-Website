@@ -4,7 +4,8 @@ import { useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import type { ReactNode } from "react";
 
-const API_BASE_URL = "https://mlotdev.azurewebsites.net/api/v1";
+const API_BASE_URL =
+  "https://moneylotv2webapi-aedchvaqddhaaneb.southafricanorth-01.azurewebsites.net/api/v1";
 
 const CLIENT_SERVICE_AGREEMENT_CONFIRM_SIGNATURE = "";
 
@@ -12,12 +13,12 @@ const ClientServiceAgreement = () => {
   const [searchParams] = useSearchParams();
   const agreementDetails = useMemo(
     () => getAgreementDetails(searchParams),
-    [searchParams]
+    [searchParams],
   );
 
   const clientServiceAgreementPreamble = useMemo(
     () => buildClientServiceAgreementPreamble(agreementDetails),
-    [agreementDetails]
+    [agreementDetails],
   );
 
   const [confirming, setConfirming] = useState(false);
@@ -37,21 +38,21 @@ const ClientServiceAgreement = () => {
     try {
       await axios.post(
         `${API_BASE_URL}/auth/confirm-agreement/${encodeURIComponent(
-          agreementDetails.email
+          agreementDetails.email,
         )}`,
         undefined,
         {
           headers: CLIENT_SERVICE_AGREEMENT_CONFIRM_SIGNATURE
             ? { "X-Auth-Signature": CLIENT_SERVICE_AGREEMENT_CONFIRM_SIGNATURE }
             : undefined,
-        }
+        },
       );
 
       toast.success("Confirmed.");
     } catch (error: any) {
       toast.error(
         error?.response?.data?.message ||
-          "Something went wrong. Please try again."
+          "Something went wrong. Please try again.",
       );
     } finally {
       setConfirming(false);
@@ -122,7 +123,9 @@ const ClientServiceAgreement = () => {
               blocks={clientServiceAgreementPreamble}
             />
             <div className="mt-7">
-              <ClientServiceAgreementOutline sections={CLIENT_SERVICE_AGREEMENT_SECTIONS} />
+              <ClientServiceAgreementOutline
+                sections={CLIENT_SERVICE_AGREEMENT_SECTIONS}
+              />
             </div>
           </AgreementSection>
 
@@ -135,9 +138,9 @@ const ClientServiceAgreement = () => {
                 />
                 <span className="text-[#2F2F2F] text-[14px] leading-[20px] sm:text-[15px] sm:leading-[22px]">
                   I/We confirm that I/We have read and understood the content of
-                  this Risk Disclosure Statement and indemnity and any question(s)
-                  I/ We have in relation thereto have been addressed by the
-                  Portfolio Manager to my/our satisfaction
+                  this Risk Disclosure Statement and indemnity and any
+                  question(s) I/ We have in relation thereto have been addressed
+                  by the Portfolio Manager to my/our satisfaction
                 </span>
               </label>
 
@@ -194,7 +197,9 @@ function ConsentCheckbox({
           "flex items-center justify-center h-4 w-4 rounded-[4px] border",
           "transition-colors",
           "peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[#1B332D]",
-          checked ? "bg-[#89E081] border-[#89E081]" : "bg-white border-[#B9B9B9]",
+          checked
+            ? "bg-[#89E081] border-[#89E081]"
+            : "bg-white border-[#B9B9B9]",
         ].join(" ")}
         aria-hidden="true"
       >
@@ -339,7 +344,11 @@ function readStoredAgreementDetails(): Partial<AgreementDetails> {
   }
 }
 
-function ClientServiceAgreementOutline({ sections }: { sections: CsaSection[] }) {
+function ClientServiceAgreementOutline({
+  sections,
+}: {
+  sections: CsaSection[];
+}) {
   return (
     <div className="mt-1 space-y-5">
       {sections.map((section) => (
@@ -454,7 +463,7 @@ const RISK_DISCLOSURE_PARAGRAPHS = [
   "The statement contained herein is not intended to disclose an exhaustive list of all the risks and other significant aspects of trading in the Nigerian Capital Market.",
   "There are varying degrees of risk for different market instruments; hence you should not make any investment in the capital market unless you fully understand the nature and the extent of the risks involved. You are advised to carefully consider if an investment is appropriate for you in light of your experience, investment objectives, financial resources and all other conditions.",
   "For investments relating to securities, an investor is at risk of losing 100% of his/her investment. The prices of securities fluctuate, sometimes drastically. Due to such fluctuation, the value of a security may be become insignificant and it is likely that losses may be incurred rather than profit as a result of buying and selling securities. Fluctuations in currency rates where there is a need to convert from a currency denomination to another, may affect profit or loss in foreign currency denominated transactions. Transactions in other markets within and outside the country may also expose you to additional risks. Such markets may offer different or diminished investor protection as they operate under different rules and regulations from that which the Nigerian capital market operates under.",
-  "You are further advised to seek proper clarification of all fees, commissions and charges to be incurred before sending an instruction. The total sum of all fees, commissions and charges will affect your net profit (if any) or increase your loss. Should you feel the need to make any enquiries about the likely risks associated with an intended investment, please feel free to speak with any of our Client Relationship Managers."
+  "You are further advised to seek proper clarification of all fees, commissions and charges to be incurred before sending an instruction. The total sum of all fees, commissions and charges will affect your net profit (if any) or increase your loss. Should you feel the need to make any enquiries about the likely risks associated with an intended investment, please feel free to speak with any of our Client Relationship Managers.",
 ];
 
 const ELECTRONIC_COMMUNICATION_PARAGRAPHS = [
@@ -463,54 +472,60 @@ const ELECTRONIC_COMMUNICATION_PARAGRAPHS = [
   "The Client acknowledges that there are certain risks associated with conveying instructions via electronic means, including, but not limited to the risk of delay, non-receipt (due to technical malfunction, disruption, connectivity issues, etc. of your system or the Portfolio Manager's system or any other reason), third party interception/interference, data corruption, etc., and hereby fully waives, discharges and indemnifies the Portfolio Manager in respect of any loss or damages resulting from any of the risks identified above/ from the use of electronic communication with respect to the Client's account.",
 ];
 
-const TERMS_AND_CONDITIONS_SUBSECTIONS:
-  | Array<
-      | {
-          kind: "paragraphs";
-          title: string;
-          paragraphs: string[];
-        }
-      | {
-          kind: "declaration";
-          title: string;
-          items: string[];
-        }
-    >
-  = [
-    {
-      kind: "paragraphs",
-      title: "NON- LIABILITY",
-      paragraphs: ["The Portfolio Manager shall not be responsible and hereby disclaims all liabilities, including liability for all and any actual or contingent losses, liabilities, damages and costs (including, without limitation, legal costs) and any expenses of any nature whatsoever, which the Client or anyone claiming through the Client may suffer or incur as a result of or in connection with any instruction given by the Client or any person authorized by the Client, whether or not such person(s) acted beyond the scope of their mandate from the Client in giving the instruction. In no event shall the Portfolio Manager be liable to the Client for any indirect or consequential loss or for any loss occasioned by the act or omission of any third party acting under the Client's authorization."],
-    },
-    {
-      kind: "paragraphs",
-      title: "COMMUNICATION",
-      paragraphs: ["The Portfolio Manager reserves the right to record any telephone conversations with the Client and the Client acknowledges that this is in line with international best practice and shall be done solely for the purpose of resolving any disputes which may arise concerning telephone advice or instructions."],
-    },
-    {
-      kind: "paragraphs",
-      title: "REGULATORY DISCLOSURE",
-      paragraphs: ["The Portfolio Manager is subject to the provisions of the Money Laundering (Prohibition) Act Act in force in the Federal Republic of Nigeria, the Economic and Financial Crimes Commission (Establishment) Act 2002, the National Drug Law Enforcement Agency Act of 1995, the Consolidated SEC rules and regulations and other legislation which may be implemented from time to time to combat money laundering and other financial crimes. The Portfolio Manager is required to comply with the provisions of these legislation and all similar legislation, especially those relating to disclosure and suspicious activity reporting."],
-    },
-    {
-      kind: "paragraphs",
-      title: "THIRD PARTY PAYMENT",
-      paragraphs: ["The Client agrees that payments of proceeds of investments shall only be made to the client. No third party payments shall be instructed as the Portfolio Manager is not obligated to honor such requests."],
-    },
-    {
-      kind: "declaration",
-      title: "DECLARATION",
-      items: [
-        "The client declares that he/she/it is the sole beneficial owner(s) of the funds/assets to be deposited with the Portfolio Manager.",
-        "The client hereby acknowledges that the funds and source of such funds are legitimate and not directly or indirectly the proceeds of any unlawful activity.",
-        "The client also agrees to be bound by any review, changes or amendments made to the terms and conditions stated in this document, which may occur from time to time, provided the client receives written notification of such changes via the client's agreed means of communication.",
-        "The client attests that all information and documentation provided are valid and authentic and the Portfolio Manager is authorized to verify any or all of the information provided.",
-      ],
-    },
-  ];
+const TERMS_AND_CONDITIONS_SUBSECTIONS: Array<
+  | {
+      kind: "paragraphs";
+      title: string;
+      paragraphs: string[];
+    }
+  | {
+      kind: "declaration";
+      title: string;
+      items: string[];
+    }
+> = [
+  {
+    kind: "paragraphs",
+    title: "NON- LIABILITY",
+    paragraphs: [
+      "The Portfolio Manager shall not be responsible and hereby disclaims all liabilities, including liability for all and any actual or contingent losses, liabilities, damages and costs (including, without limitation, legal costs) and any expenses of any nature whatsoever, which the Client or anyone claiming through the Client may suffer or incur as a result of or in connection with any instruction given by the Client or any person authorized by the Client, whether or not such person(s) acted beyond the scope of their mandate from the Client in giving the instruction. In no event shall the Portfolio Manager be liable to the Client for any indirect or consequential loss or for any loss occasioned by the act or omission of any third party acting under the Client's authorization.",
+    ],
+  },
+  {
+    kind: "paragraphs",
+    title: "COMMUNICATION",
+    paragraphs: [
+      "The Portfolio Manager reserves the right to record any telephone conversations with the Client and the Client acknowledges that this is in line with international best practice and shall be done solely for the purpose of resolving any disputes which may arise concerning telephone advice or instructions.",
+    ],
+  },
+  {
+    kind: "paragraphs",
+    title: "REGULATORY DISCLOSURE",
+    paragraphs: [
+      "The Portfolio Manager is subject to the provisions of the Money Laundering (Prohibition) Act Act in force in the Federal Republic of Nigeria, the Economic and Financial Crimes Commission (Establishment) Act 2002, the National Drug Law Enforcement Agency Act of 1995, the Consolidated SEC rules and regulations and other legislation which may be implemented from time to time to combat money laundering and other financial crimes. The Portfolio Manager is required to comply with the provisions of these legislation and all similar legislation, especially those relating to disclosure and suspicious activity reporting.",
+    ],
+  },
+  {
+    kind: "paragraphs",
+    title: "THIRD PARTY PAYMENT",
+    paragraphs: [
+      "The Client agrees that payments of proceeds of investments shall only be made to the client. No third party payments shall be instructed as the Portfolio Manager is not obligated to honor such requests.",
+    ],
+  },
+  {
+    kind: "declaration",
+    title: "DECLARATION",
+    items: [
+      "The client declares that he/she/it is the sole beneficial owner(s) of the funds/assets to be deposited with the Portfolio Manager.",
+      "The client hereby acknowledges that the funds and source of such funds are legitimate and not directly or indirectly the proceeds of any unlawful activity.",
+      "The client also agrees to be bound by any review, changes or amendments made to the terms and conditions stated in this document, which may occur from time to time, provided the client receives written notification of such changes via the client's agreed means of communication.",
+      "The client attests that all information and documentation provided are valid and authentic and the Portfolio Manager is authorized to verify any or all of the information provided.",
+    ],
+  },
+];
 
 function buildClientServiceAgreementPreamble(
-  details: AgreementDetails
+  details: AgreementDetails,
 ): CsaPreambleBlock[] {
   const date = details.date || "________________";
   const fullName = details.fullName || "________________";
@@ -560,61 +575,77 @@ const CLIENT_SERVICE_AGREEMENT_SECTIONS: CsaSection[] = [
   {
     number: "1",
     title: "Definitions",
-    paragraphs: ["In this Agreement, the following words and expressions shall have the meaning hereafter assigned to them respectively, unless the context in which they are used or the meaning thereof otherwise requires:"],
+    paragraphs: [
+      "In this Agreement, the following words and expressions shall have the meaning hereafter assigned to them respectively, unless the context in which they are used or the meaning thereof otherwise requires:",
+    ],
     clauses: [
       {
         number: "1.11",
         // label: "“Agreement”",
         paragraphs: [
-          "\"Agreement\" means this Investment Management Agreement including the Schedules and annexures attached hereto;",
+          '"Agreement" means this Investment Management Agreement including the Schedules and annexures attached hereto;',
         ],
       },
       {
         number: "1.12",
         // label: "“Applicable Laws”",
         paragraphs: [
-          "\"Applicable Laws\" means any local statutes, rules and regulations, circular or directives issued by a regulatory authority;",
+          '"Applicable Laws" means any local statutes, rules and regulations, circular or directives issued by a regulatory authority;',
         ],
       },
       {
         number: "1.13",
         // label: "“Client”",
-        paragraphs: ["\"Authorized Personnel\" means a Party's authorized signatory as stated in Section C of this document"],
+        paragraphs: [
+          '"Authorized Personnel" means a Party\'s authorized signatory as stated in Section C of this document',
+        ],
       },
       {
         number: "1.14",
         // label: "…",
-        paragraphs: ["\"Asset under Management\" refers to the total market value of the Client's investment managed by the Portfolio Manager on behalf of the Client;"],
+        paragraphs: [
+          '"Asset under Management" refers to the total market value of the Client\'s investment managed by the Portfolio Manager on behalf of the Client;',
+        ],
       },
       {
         number: "1.15",
         // label: "…",
-        paragraphs: ["“Business Day” means any day, which is not a Saturday, Sunday or Federal Government public holiday in Nigeria, in which the Portfolio Manager is open for business;"],
+        paragraphs: [
+          "“Business Day” means any day, which is not a Saturday, Sunday or Federal Government public holiday in Nigeria, in which the Portfolio Manager is open for business;",
+        ],
       },
       {
         number: "1.16",
         // label: "…",
-        paragraphs: ["“Commencement Date” means the date aforementioned on which this Agreement is executed by the Client and the Portfolio Manager;"],
+        paragraphs: [
+          "“Commencement Date” means the date aforementioned on which this Agreement is executed by the Client and the Portfolio Manager;",
+        ],
       },
       {
         number: "1.17",
         // label: "…",
-        paragraphs: ["\"Confidential Information\" means any information of a commercial, financial or technical nature relating to the Portfolio, the Investments and the financial position of the Client which was supplied to the Portfolio Manager by the Client or the Portfolio Manager may receive through the normal course of the performance of the its services under this Agreement;"],
+        paragraphs: [
+          '"Confidential Information" means any information of a commercial, financial or technical nature relating to the Portfolio, the Investments and the financial position of the Client which was supplied to the Portfolio Manager by the Client or the Portfolio Manager may receive through the normal course of the performance of the its services under this Agreement;',
+        ],
       },
       {
         number: "1.18",
         // label: "…",
-        paragraphs: ["“Investment Guidelines” means the Client's investment objectives for the Portfolio as set out in Clause 8 of this Agreement or as otherwise agreed to in writing between the Portfolio Manager and the Client from time to time;"],
+        paragraphs: [
+          "“Investment Guidelines” means the Client's investment objectives for the Portfolio as set out in Clause 8 of this Agreement or as otherwise agreed to in writing between the Portfolio Manager and the Client from time to time;",
+        ],
       },
       {
-        number: "1.18",
+        number: "1.19",
         // label: "…",
         paragraphs: ["“Investment” means the"],
       },
       {
         number: "1.19.1",
         // label: "…",
-        paragraphs: ["bonds, shares, money-market instruments, Real Estate, cash and near cash; and "],
+        paragraphs: [
+          "bonds, shares, money-market instruments, Real Estate, cash and near cash; and ",
+        ],
       },
       {
         number: "1.19.2",
@@ -624,56 +655,65 @@ const CLIENT_SERVICE_AGREEMENT_SECTIONS: CsaSection[] = [
       {
         number: "1.19.3",
         // label: "…",
-        paragraphs: ["and money subsequently acquired or held by the Portfolio Manager on behalf of the Client;"],
+        paragraphs: [
+          "and money subsequently acquired or held by the Portfolio Manager on behalf of the Client;",
+        ],
       },
       {
         number: "1.20",
         // label: "…",
-        paragraphs: ["\"Manage\" means any act performed by the Portfolio Manager in connection with the: purchasing, selling, reinvesting, or otherwise managing of the Investments;"],
+        paragraphs: [
+          '"Manage" means any act performed by the Portfolio Manager in connection with the:',
+        ],
       },
       {
         number: "1.20.1",
         // label: "…",
-        paragraphs: ["buying, selling, administering and/or holding of Investments on behalf of the Client; or"],
+        paragraphs: [
+          "buying, selling, administering and/or holding of Investments on behalf of the Client; or",
+        ],
       },
       {
         number: "1.20.2",
         // label: "…",
-        paragraphs: ["receiving, payment or investment of money, including interest and dividends, in respect of a transaction entered into and/or the holding of Investments on behalf of the Client;"],
+        paragraphs: [
+          "receiving, payment or investment of money, including interest and dividends, in respect of a transaction entered into and/or the holding of Investments on behalf of the Client;",
+        ],
       },
       {
         number: "1.21",
         // label: "…",
-        paragraphs: ["\"Portfolio\" means the grouping of the total assets belonging to the Client and also managed by the Portfolio Manager pursuant to this Agreement. It also includes the Client's funds;"],
+        paragraphs: [
+          '"Portfolio" means the grouping of the total assets belonging to the Client and also managed by the Portfolio Manager pursuant to this Agreement. It also includes the Client\'s funds;',
+        ],
       },
       {
         number: "1.22",
         // label: "…",
         paragraphs: [
-          "\"Quarter\" means every calendar quarter of three months i.e. March, June, September and December, provided that the first quarter from the date of commencement may be for a period less than 3 months;",
+          '"Quarter" means every calendar quarter of three months i.e. March, June, September and December, provided that the first quarter from the date of commencement may be for a period less than 3 months;',
         ],
       },
       {
         number: "1.23",
         // label: "…",
         paragraphs: [
-          "\"Half year\" or \"Semi-annual\" means every calendar half year of six months i.e. June and December provided that the first half year from the date of commencement may be for a period less than 6 months;",
+          '"Half year" or "Semi-annual" means every calendar half year of six months i.e. June and December provided that the first half year from the date of commencement may be for a period less than 6 months;',
         ],
       },
       {
         number: "1.24",
         // label: "…",
-        paragraphs: ["“SEC” means the Securities and Exchange Commission of Nigeria;"],
-      },
-      {
-        number: "1.24",
-        // label: "…",
-        paragraphs: ["“Termination Date” means the date upon which this Agreement is terminated in accordance with the provisions of Clause 16;"],
+        paragraphs: [
+          "“SEC” means the Securities and Exchange Commission of Nigeria;",
+        ],
       },
       {
         number: "1.25",
         // label: "…",
-        paragraphs: ["“SEC” means the Securities and Exchange Commission of Nigeria;"],
+        paragraphs: [
+          "“Termination Date” means the date upon which this Agreement is terminated in accordance with the provisions of Clause 16;",
+        ],
       },
     ],
   },
@@ -683,15 +723,21 @@ const CLIENT_SERVICE_AGREEMENT_SECTIONS: CsaSection[] = [
     clauses: [
       {
         number: "2.1",
-        paragraphs: ["The Client hereby appoints the Portfolio Manager to provide Portfolio Management Services with effect from the commencement date in accordance with the terms and conditions set out herein."],
+        paragraphs: [
+          "The Client hereby appoints the Portfolio Manager to provide Portfolio Management Services with effect from the commencement date in accordance with the terms and conditions set out herein.",
+        ],
       },
       {
         number: "2.2",
-        paragraphs: ["The Portfolio Manager agrees to provide the Portfolio Management Services which may include, but not limited to, investment consultancy, renewing or readjusting of the Client's portfolio and buying or selling of securities."],
+        paragraphs: [
+          "The Portfolio Manager agrees to provide the Portfolio Management Services which may include, but not limited to, investment consultancy, renewing or readjusting of the Client's portfolio and buying or selling of securities.",
+        ],
       },
       {
-        number: "2.2",
-        paragraphs: ["Parties agree that in the event of any conflict between this Investment Management Agreement and any applicable law, the applicable law shall prevail."],
+        number: "2.3",
+        paragraphs: [
+          "Parties agree that in the event of any conflict between this Investment Management Agreement and any applicable law, the applicable law shall prevail.",
+        ],
       },
     ],
   },
@@ -831,7 +877,7 @@ const CLIENT_SERVICE_AGREEMENT_SECTIONS: CsaSection[] = [
         number: "5.1.3",
         paragraphs: [
           "Provide the Client, on or before the 10th (tenth) working Day of a new quarter, with a comprehensive investment report in respect of the preceding quarter, reflecting at least the details of:",
-          "a) All Investments held at the end of the preceding quarter, including the current market value of each Investment;\n b) Any income that accrued to, or for the benefit of, the Client during the preceding quarter",
+          "**a) All Investments held at the end of the preceding quarter, including the current market value of each Investment;**\n **b) Any income that accrued to, or for the benefit of, the Client during the preceding quarter**",
         ],
       },
       {
@@ -866,7 +912,10 @@ const CLIENT_SERVICE_AGREEMENT_SECTIONS: CsaSection[] = [
       },
       { number: "6.2.1", paragraphs: ["The prevailing market conditions;"] },
       { number: "6.2.2", paragraphs: ["The size of the withdrawal; and"] },
-      { number: "6.2.3", paragraphs: ["The nature of the investment being redeemed."] },
+      {
+        number: "6.2.3",
+        paragraphs: ["The nature of the investment being redeemed."],
+      },
       {
         number: "6.3",
         paragraphs: [
