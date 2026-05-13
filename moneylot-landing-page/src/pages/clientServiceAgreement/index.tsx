@@ -3,11 +3,15 @@ import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import type { ReactNode } from "react";
+import signedSuccessfully from "../../assets/signedSuccessfully.png";
+import alreadySigned from "../../assets/alreadySigned.png";
 
 const API_BASE_URL =
   "https://moneylotv2webapi-aedchvaqddhaaneb.southafricanorth-01.azurewebsites.net/api/v1";
 
 const CLIENT_SERVICE_AGREEMENT_CONFIRM_SIGNATURE = "";
+
+type AgreementModalType = "success" | "already-signed";
 
 const ClientServiceAgreement = () => {
   const [searchParams] = useSearchParams();
@@ -24,6 +28,9 @@ const ClientServiceAgreement = () => {
   const [confirming, setConfirming] = useState(false);
   const [ackRiskDisclosure, setAckRiskDisclosure] = useState(false);
   const [ackTerms, setAckTerms] = useState(false);
+  const [agreementModal, setAgreementModal] = useState<AgreementModalType | null>(
+    null,
+  );
 
   const canConfirm = ackRiskDisclosure && ackTerms && !confirming;
 
@@ -36,7 +43,7 @@ const ClientServiceAgreement = () => {
 
     setConfirming(true);
     try {
-      await axios.post(
+      const response = await axios.post(
         `${API_BASE_URL}/auth/confirm-agreement/${encodeURIComponent(
           agreementDetails.email,
         )}`,
@@ -48,11 +55,21 @@ const ClientServiceAgreement = () => {
         },
       );
 
-      toast.success("Confirmed.");
+      const message = String(response?.data?.message ?? "").toLowerCase();
+      setAgreementModal(
+        message.includes("already") || message.includes("signed")
+          ? "already-signed"
+          : "success",
+      );
     } catch (error: any) {
+      const message = String(error?.response?.data?.message ?? "");
+      if (message.toLowerCase().includes("already")) {
+        setAgreementModal("already-signed");
+        return;
+      }
+
       toast.error(
-        error?.response?.data?.message ||
-          "Something went wrong. Please try again.",
+        message || "Something went wrong. Please try again.",
       );
     } finally {
       setConfirming(false);
@@ -173,9 +190,57 @@ const ClientServiceAgreement = () => {
           </div>
         </div>
       </section>
+
+      <AgreementStatusModal
+        type={agreementModal}
+        onClose={() => setAgreementModal(null)}
+      />
     </main>
   );
 };
+
+function AgreementStatusModal({
+  type,
+  onClose,
+}: {
+  type: AgreementModalType | null;
+  onClose: () => void;
+}) {
+  if (!type) return null;
+
+  const isSuccess = type === "success";
+
+  return (
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 px-5">
+      <div className="relative w-full max-w-[520px] overflow-hidden rounded-xl bg-white shadow-[0_24px_80px_rgba(0,0,0,0.28)]">
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close"
+          className="absolute right-5 top-5 flex h-7 w-7 items-center justify-center rounded-full bg-[#BFC7C5] text-white text-[18px] leading-none border-none outline-none focus:outline-none focus:ring-0"
+        >
+          ×
+        </button>
+
+        <div className="border-b border-[#E9E9E9] px-8 py-7" />
+
+        <div className="flex flex-col items-center px-8 pb-24 pt-10 text-center">
+          <img
+            src={isSuccess ? signedSuccessfully : alreadySigned}
+            alt=""
+            className="h-[112px] w-[112px] object-contain"
+            draggable={false}
+          />
+          <p className="mt-10 max-w-[360px] text-[#1B1B1B] text-[20px] leading-[28px] font-medium">
+            {isSuccess
+              ? "Your acknowledgment has been successfully recorded."
+              : "This indemnity agreement has already been signed."}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function ConsentCheckbox({
   checked,
